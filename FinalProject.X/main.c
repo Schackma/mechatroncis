@@ -66,10 +66,10 @@ void interrupt_at_low_vector(void) {
 char recentStateX = STEP1;
 char recentStateY = STEP1;
 int motor_spd = 65380;
-int goalX = 0;
-int goalY = 0;
-int x = 0;
-int y = 0;
+long goalX = 5;
+long goalY = 5;
+long x = 0;
+long y = 0;
 
 
 /*****************************************************************
@@ -95,8 +95,8 @@ void main(void) {
     INTCONbits.GIE = 1; //  Enable High priority interrupt
 
     // Setup the digital IO pins
-    ADCON1 = 0x0F; // Make sure they are digital not analog
-    TRISC = 0xE0; // Make the RC4:RC0 outputs
+    ADCON1 = 0x0D; // Make sure they are digital not analog
+    TRISC = 0x00; // Make the RC4:RC0 outputs
     PORTC = 0x00; // Clear the bits to start with
 
     OpenADC(ADC_FOSC_8 & ADC_RIGHT_JUST & ADC_12_TAD,
@@ -106,15 +106,15 @@ void main(void) {
     while (1) {
         // A blank while loop, think of all the things you could do here!
         // When you use an interrupt the main loop is free for something else
-        SetChanADC(ADC_CH0);
-        ConvertADC();
-        while (BusyADC());
-        goalX = ReadADC()*8500 / 1023;
-
-        SetChanADC(ADC_CH1);
-        ConvertADC();
-        while (BusyADC());
-        goalY = ReadADC()*1100 / 1023;
+//        SetChanADC(ADC_CH0);
+//        ConvertADC();
+//        while (BusyADC());
+//        goalX = ReadADC()*8500 / 1023;
+//
+//        SetChanADC(ADC_CH1);
+//        ConvertADC();
+//        while (BusyADC());
+//        goalY = ReadADC()*1100 / 1023;
     }
 }
 
@@ -128,29 +128,30 @@ void main(void) {
 #pragma interrupt high_isr
 
 void high_isr(void) {
+    char output;
     // Check whether it was the timer interrupt that got us here 
     // (better be, since that's the only interrupt right now)
     if (INTCONbits.TMR0IF) {
         INTCONbits.TMR0IF = 0; // Clear interrupt flag for timer 0
-        if (x - goalX > 0) {
+        if (x - goalX < 0) {
             recentStateX = moveForward(recentStateX);
             x += REV_TO_DIST;
-        } else if (x - goalX < 0) {
+        } else if (x - goalX > 0) {
             recentStateX = moveBackwards(recentStateX);
             x -= REV_TO_DIST;
         }
-        if (y - goalY > 0) {
+        if (y - goalY < 0) {
             recentStateY = moveForward(recentStateY);
             recentStateY = recentStateY << 4;
             y += REV_TO_DIST;
-        } else if (y - goalY < 0) {
+        } else if (y - goalY > 0) {
             recentStateY = moveBackwards(recentStateY);
             recentStateY = recentStateY << 4;
             y -= REV_TO_DIST;
         }
     }
-
-    PORTC = recentStateX | recentStateY;
+    output= recentStateX | recentStateY;
+    PORTC = output;
     //TODO: bit shifting magic for y movement
 
     // The Timer0 frequency is 31.25 kHz 
