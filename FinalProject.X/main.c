@@ -8,16 +8,10 @@
  *  code within the high priority interrupt to change how often the
  *  interrupt occurs.  
  *
- *  H-Bridge connections for driving a stepper motor.
- *	RC0		=	L293 Enable line
- *	RC1		=	Phase A control line
- *  	RC2		=	Phase A control line
- *  	RC3		=	Phase B control line
- *  	RC4		=	Phase B control line
+ *  
  *
- * Author               Date        Comment
- * David Fisher       9/25/07      Created
- * David Fisher       12/18/09     Moved enable line to RB0
+ * Author                           Date        Comment
+ * Peter Heath & Matthew Schack     2/9/10      all sorts of fun stuff
  *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
 
@@ -32,7 +26,7 @@
 #define STEP3 0b00000101
 #define STEP4 0b00000110
 
-#define REV_TO_DIST 100 //TODO: change
+#define REV_TO_DIST 12 //TODO: change  0.0123 inches/tick
 
 /** Local Function Prototypes **************************************/
 void low_isr(void);
@@ -66,10 +60,10 @@ void interrupt_at_low_vector(void) {
 char recentStateX = STEP1;
 char recentStateY = STEP1;
 int motor_spd = 65380;
-long goalX = 5;
-long goalY = 5;
-long x = 0;
-long y = 0;
+volatile long goalX = 0;
+volatile long goalY = 0;
+volatile long x = 0;
+volatile long y = 0;
 
 
 /*****************************************************************
@@ -97,6 +91,7 @@ void main(void) {
     // Setup the digital IO pins
     ADCON1 = 0x0D; // Make sure they are digital not analog
     TRISC = 0x00; // Make the RC4:RC0 outputs
+    TRISD = 0x00;
     PORTC = 0x00; // Clear the bits to start with
 
     OpenADC(ADC_FOSC_8 & ADC_RIGHT_JUST & ADC_12_TAD,
@@ -106,15 +101,15 @@ void main(void) {
     while (1) {
         // A blank while loop, think of all the things you could do here!
         // When you use an interrupt the main loop is free for something else
-//        SetChanADC(ADC_CH0);
-//        ConvertADC();
-//        while (BusyADC());
-//        goalX = ReadADC()*8500 / 1023;
-//
-//        SetChanADC(ADC_CH1);
-//        ConvertADC();
-//        while (BusyADC());
-//        goalY = ReadADC()*1100 / 1023;
+                SetChanADC(ADC_CH0);
+                ConvertADC();
+                while (BusyADC());
+                goalX = (long)ReadADC()*8500 / 1023;
+        
+                SetChanADC(ADC_CH1);
+                ConvertADC();
+                while (BusyADC());
+                goalY = (long)ReadADC()*11000 / 1023;
     }
 }
 
@@ -133,25 +128,27 @@ void high_isr(void) {
     // (better be, since that's the only interrupt right now)
     if (INTCONbits.TMR0IF) {
         INTCONbits.TMR0IF = 0; // Clear interrupt flag for timer 0
-        if (x - goalX < 0) {
+        if (x - goalX < -REV_TO_DIST) {
             recentStateX = moveForward(recentStateX);
             x += REV_TO_DIST;
-        } else if (x - goalX > 0) {
+        } else if (x - goalX >= REV_TO_DIST) {
             recentStateX = moveBackwards(recentStateX);
             x -= REV_TO_DIST;
         }
-        if (y - goalY < 0) {
+        if (y - goalY < -REV_TO_DIST) {
             recentStateY = moveForward(recentStateY);
-            recentStateY = recentStateY << 4;
+            //            recentStateY = recentStateY << 4;
             y += REV_TO_DIST;
-        } else if (y - goalY > 0) {
+        } else if (y - goalY >= REV_TO_DIST) {
             recentStateY = moveBackwards(recentStateY);
-            recentStateY = recentStateY << 4;
+            //            recentStateY = recentStateY << 4;
             y -= REV_TO_DIST;
         }
     }
-    output= recentStateX | recentStateY;
+    output = recentStateX;
     PORTC = output;
+    output = recentStateY;
+    PORTD = output;
     //TODO: bit shifting magic for y movement
 
     // The Timer0 frequency is 31.25 kHz 
