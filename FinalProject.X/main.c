@@ -40,6 +40,8 @@ void high_isr(void);
 char moveForward(char recentState);
 char moveBackwards(char recentState);
 void move(void);
+void home(void);
+void movePattern(void);
 
 // ============================================================
 // Configuration Bits 
@@ -86,11 +88,6 @@ void main(void) {
     OSCCONbits.IRCF1 = 1;
     OSCCONbits.IRCF0 = 1;
 
-    // Setup the timer with a 1:4 prescaler with 16 bits resolution
-    // Therefore the timer0 freq is 500 kHz / 4 / 4 = 31.25 kHz
-
-    // Should take a little over 2 seconds to overflow the counter from TMR0 = 0
-    // If you write in a different starting value for TMR0 it'll overflow sooner
 
 
 
@@ -98,9 +95,9 @@ void main(void) {
     INTCONbits.GIE = 1; //  Enable High priority interrupt
 
     // Setup the digital IO pins
-    ADCON1 = 0x0D; // Make sure they are digital not analog
-    TRISC = 0x00; // Make the RC4:RC0 outputs
-    TRISD = 0x00;
+    ADCON1 = 0x0D; // Make RA0:RA1 analog inputs
+    TRISC = 0x00; // Make the RC ports outputs
+    TRISD = 0x00; // Make RD ports outputs
     PORTC = 0x00; // Clear the bits to start with
     TRISE = 0x07; // RE0:RE2 are inputs
 
@@ -108,47 +105,7 @@ void main(void) {
             ADC_CH0 & ADC_INT_OFF & ADC_REF_VDD_VSS,
             0x0E);
 
-    while (PORTEbits.RE0 != PRESSED);
-    while (PORTBbits.RB2 != PRESSED) {
-        int output;
-        recentStateX = moveBackwards(recentStateX);
-        Delay100TCYx(5);
-        output = recentStateX;
-        PORTC = output;
-        output = recentStateY;
-        PORTD = output;
-    }
-    while (PORTBbits.RB3 != PRESSED) {
-        int output;
-        recentStateX = moveForward(recentStateX);
-        Delay100TCYx(5);
-        output = recentStateX;
-        PORTC = output;
-        output = recentStateY;
-        PORTD = output;
-        xLength++;
-    }
-    while (PORTBbits.RB1 != PRESSED) {
-        int output;
-        recentStateY = moveBackwards(recentStateY);
-        Delay100TCYx(5);
-        output = recentStateX;
-        PORTC = output;
-        output = recentStateY;
-        PORTD = output;
-    }
-    while (PORTBbits.RB0 != PRESSED) {
-        int output;
-        recentStateY = moveForward(recentStateY);
-        Delay100TCYx(5);
-        output = recentStateX;
-        PORTC = output;
-        output = recentStateY;
-        PORTD = output;
-        yLength++;
-    }
-    x = xLength*REV_TO_DIST;
-    y = yLength*REV_TO_DIST;
+    home();
     OpenTimer0(TIMER_INT_ON & T0_16BIT & T0_SOURCE_INT & T0_PS_1_4);
     WriteTimer0(65530); // Start the timer at a some high value to get to the ISR the first time asap
     here = 1;
@@ -165,6 +122,9 @@ void main(void) {
             ConvertADC();
             while (BusyADC());
             goalY = (long) ReadADC() * yLength * REV_TO_DIST / 1023;
+        }
+        if (PORTEbits.RE1 == PRESSED) {
+            movePattern();
         }
     }
 }
@@ -273,4 +233,64 @@ void move(void) {
     output = recentStateY;
     PORTD = output;
     WriteTimer0(motor_spd);
+}
+
+void home(void) {
+    while (PORTEbits.RE0 != PRESSED);
+    while (PORTBbits.RB2 != PRESSED) {
+        int output;
+        recentStateX = moveBackwards(recentStateX);
+        Delay100TCYx(5);
+        output = recentStateX;
+        PORTC = output;
+        output = recentStateY;
+        PORTD = output;
+    }
+    while (PORTBbits.RB3 != PRESSED) {
+        int output;
+        recentStateX = moveForward(recentStateX);
+        Delay100TCYx(5);
+        output = recentStateX;
+        PORTC = output;
+        output = recentStateY;
+        PORTD = output;
+        xLength++;
+    }
+    while (PORTBbits.RB1 != PRESSED) {
+        int output;
+        recentStateY = moveBackwards(recentStateY);
+        Delay100TCYx(5);
+        output = recentStateX;
+        PORTC = output;
+        output = recentStateY;
+        PORTD = output;
+    }
+    while (PORTBbits.RB0 != PRESSED) {
+        int output;
+        recentStateY = moveForward(recentStateY);
+        Delay100TCYx(5);
+        output = recentStateX;
+        PORTC = output;
+        output = recentStateY;
+        PORTD = output;
+        yLength++;
+    }
+    x = xLength*REV_TO_DIST;
+    y = yLength*REV_TO_DIST;
+}
+
+void movePattern(void) {
+    CloseTimer0();
+    while (PORTEbits.RE2 != PRESSED) {
+        goalY = 100 * yLength * REV_TO_DIST / 1023;
+        while (here != AT_POINT && PORTEbits.RE2 != PRESSED) {
+            move();
+        }
+        goalY = 1000 * yLength * REV_TO_DIST / 1023;
+        while (here != AT_POINT && PORTEbits.RE2 != PRESSED) {
+            move();
+        }
+    }
+    OpenTimer0(TIMER_INT_ON & T0_16BIT & T0_SOURCE_INT & T0_PS_1_4);
+    WriteTimer0(65530);
 }

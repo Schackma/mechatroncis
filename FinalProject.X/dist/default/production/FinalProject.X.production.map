@@ -1,5 +1,5 @@
 MPLINK 5.00, LINKER
-Linker Map File - Created Mon Feb 15 12:00:17 2016
+Linker Map File - Created Mon Feb 15 12:33:18 2016
 
                                  Section Info
                   Section       Type    Address   Location Size(Bytes)
@@ -10,45 +10,48 @@ Linker Map File - Created Mon Feb 15 12:00:17 2016
           .code_adcbusy.o       code   0x00000e    program   0x00000a
                low_vector       code   0x000018    program   0x000006
                    .cinit    romdata   0x00001e    program   0x00000e
-             .code_main.o       code   0x00002c    program   0x000690
-               _cinit_scn       code   0x0006bc    program   0x00009e
-          .code_fxm3232.o       code   0x00075a    program   0x000070
-          .code_adcopen.o       code   0x0007ca    program   0x00006e
-                     PROG       code   0x000838    program   0x000068
-         .code_fxd3232u.o       code   0x0008a0    program   0x000048
-          .code_t0write.o       code   0x0008e8    program   0x000038
-           .code_t0open.o       code   0x000920    program   0x000038
-         .code_adcsetch.o       code   0x000958    program   0x00002e
-                    .code       code   0x000986    program   0x000020
-             _startup_scn       code   0x0009a6    program   0x00001c
-             D100TCYXCODE       code   0x0009c2    program   0x00001c
-          .code_adcread.o       code   0x0009de    program   0x000012
-          .code_adcconv.o       code   0x0009f0    program   0x000004
-       .romdata_adcread.o    romdata   0x0009f4    program   0x000000
-          .idata_main.o_i    romdata   0x0009f4    program   0x00001e
-        .romdata_t0open.o    romdata   0x0009f4    program   0x000000
-        .idata_t0open.o_i    romdata   0x0009f4    program   0x000000
-          .romdata_main.o    romdata   0x0009f4    program   0x000000
-       .romdata_adcopen.o    romdata   0x0009f4    program   0x000000
-         .romdata_c018i.o    romdata   0x0009f4    program   0x000000
-        .romdata___init.o    romdata   0x0009f4    program   0x000000
-       .romdata_fxm3232.o    romdata   0x0009f4    program   0x000000
-      .romdata_fxd3232u.o    romdata   0x0009f4    program   0x000000
-      .romdata_adcsetch.o    romdata   0x0009f4    program   0x000000
-       .romdata_t0write.o    romdata   0x0009f4    program   0x000000
-       .idata_t0write.o_i    romdata   0x0009f4    program   0x000000
-       .romdata_adcbusy.o    romdata   0x0009f4    program   0x000000
-       .romdata_adcconv.o    romdata   0x0009f4    program   0x000000
-      .idata_adcsetch.o_i    romdata   0x000a12    program   0x000000
-        .idata___init.o_i    romdata   0x000a12    program   0x000000
-       .idata_adcread.o_i    romdata   0x000a12    program   0x000000
-       .idata_adcopen.o_i    romdata   0x000a12    program   0x000000
-       .idata_fxm3232.o_i    romdata   0x000a12    program   0x000000
-      .idata_fxd3232u.o_i    romdata   0x000a12    program   0x000000
-       .idata_adcconv.o_i    romdata   0x000a12    program   0x000000
-       .idata_adcbusy.o_i    romdata   0x000a12    program   0x000000
-            .code_c018i.o       code   0x000a12    program   0x000000
-         .idata_c018i.o_i    romdata   0x000a12    program   0x000000
+             .code_main.o       code   0x00002c    program   0x000838
+               _cinit_scn       code   0x000864    program   0x00009e
+          .code_fxm3232.o       code   0x000902    program   0x000070
+          .code_adcopen.o       code   0x000972    program   0x00006e
+                     PROG       code   0x0009e0    program   0x000068
+         .code_fxd3232u.o       code   0x000a48    program   0x000048
+          .code_t0write.o       code   0x000a90    program   0x000038
+           .code_t0open.o       code   0x000ac8    program   0x000038
+         .code_adcsetch.o       code   0x000b00    program   0x00002e
+                    .code       code   0x000b2e    program   0x000020
+             _startup_scn       code   0x000b4e    program   0x00001c
+             D100TCYXCODE       code   0x000b6a    program   0x00001c
+          .code_adcread.o       code   0x000b86    program   0x000012
+          .code_t0close.o       code   0x000b98    program   0x000006
+          .code_adcconv.o       code   0x000b9e    program   0x000004
+      .romdata_fxd3232u.o    romdata   0x000ba2    program   0x000000
+       .romdata_fxm3232.o    romdata   0x000ba2    program   0x000000
+      .romdata_adcsetch.o    romdata   0x000ba2    program   0x000000
+       .romdata_adcopen.o    romdata   0x000ba2    program   0x000000
+        .idata_t0open.o_i    romdata   0x000ba2    program   0x000000
+        .romdata_t0open.o    romdata   0x000ba2    program   0x000000
+       .romdata_adcread.o    romdata   0x000ba2    program   0x000000
+       .idata_t0write.o_i    romdata   0x000ba2    program   0x000000
+          .idata_main.o_i    romdata   0x000ba2    program   0x00001e
+       .romdata_adcconv.o    romdata   0x000ba2    program   0x000000
+       .romdata_t0write.o    romdata   0x000ba2    program   0x000000
+       .romdata_t0close.o    romdata   0x000ba2    program   0x000000
+       .idata_t0close.o_i    romdata   0x000ba2    program   0x000000
+          .romdata_main.o    romdata   0x000ba2    program   0x000000
+       .romdata_adcbusy.o    romdata   0x000ba2    program   0x000000
+        .romdata___init.o    romdata   0x000ba2    program   0x000000
+         .romdata_c018i.o    romdata   0x000ba2    program   0x000000
+      .idata_adcsetch.o_i    romdata   0x000bc0    program   0x000000
+        .idata___init.o_i    romdata   0x000bc0    program   0x000000
+         .idata_c018i.o_i    romdata   0x000bc0    program   0x000000
+       .idata_adcread.o_i    romdata   0x000bc0    program   0x000000
+            .code_c018i.o       code   0x000bc0    program   0x000000
+       .idata_adcopen.o_i    romdata   0x000bc0    program   0x000000
+       .idata_fxm3232.o_i    romdata   0x000bc0    program   0x000000
+      .idata_fxd3232u.o_i    romdata   0x000bc0    program   0x000000
+       .idata_adcconv.o_i    romdata   0x000bc0    program   0x000000
+       .idata_adcbusy.o_i    romdata   0x000bc0    program   0x000000
     .config_300001_main.o    romdata   0x300001    program   0x000001
     .config_300002_main.o    romdata   0x300002    program   0x000001
     .config_300003_main.o    romdata   0x300003    program   0x000001
@@ -58,24 +61,26 @@ Linker Map File - Created Mon Feb 15 12:00:17 2016
                 DELAYDAT1      udata   0x000014       data   0x000001
             .idata_main.o      idata   0x000080       data   0x00001e
            .udata_c018i.o      udata   0x00009e       data   0x00000a
-          .idata___init.o      idata   0x0000a8       data   0x000000
-          .udata___init.o      udata   0x0000a8       data   0x000000
-         .idata_t0write.o      idata   0x0000a8       data   0x000000
-         .udata_t0write.o      udata   0x0000a8       data   0x000000
-        .idata_adcsetch.o      idata   0x0000a8       data   0x000000
-        .udata_adcsetch.o      udata   0x0000a8       data   0x000000
-         .idata_adcread.o      idata   0x0000a8       data   0x000000
-         .udata_adcread.o      udata   0x0000a8       data   0x000000
-          .idata_t0open.o      idata   0x0000a8       data   0x000000
-          .udata_t0open.o      udata   0x0000a8       data   0x000000
-         .idata_adcopen.o      idata   0x0000a8       data   0x000000
          .udata_adcopen.o      udata   0x0000a8       data   0x000000
+         .idata_adcopen.o      idata   0x0000a8       data   0x000000
+          .udata_t0open.o      udata   0x0000a8       data   0x000000
+          .idata_t0open.o      idata   0x0000a8       data   0x000000
+         .udata_adcread.o      udata   0x0000a8       data   0x000000
+         .idata_adcread.o      idata   0x0000a8       data   0x000000
+        .udata_adcsetch.o      udata   0x0000a8       data   0x000000
+        .idata_adcsetch.o      idata   0x0000a8       data   0x000000
+         .udata_t0write.o      udata   0x0000a8       data   0x000000
+         .idata_t0write.o      idata   0x0000a8       data   0x000000
+          .udata___init.o      udata   0x0000a8       data   0x000000
+          .idata___init.o      idata   0x0000a8       data   0x000000
          .idata_fxm3232.o      idata   0x0000a8       data   0x000000
          .udata_fxm3232.o      udata   0x0000a8       data   0x000000
         .idata_fxd3232u.o      idata   0x0000a8       data   0x000000
         .udata_fxd3232u.o      udata   0x0000a8       data   0x000000
          .idata_adcconv.o      idata   0x0000a8       data   0x000000
          .udata_adcconv.o      udata   0x0000a8       data   0x000000
+         .idata_t0close.o      idata   0x0000a8       data   0x000000
+         .udata_t0close.o      udata   0x0000a8       data   0x000000
          .idata_adcbusy.o      idata   0x0000a8       data   0x000000
          .udata_adcbusy.o      udata   0x0000a8       data   0x000000
             .udata_main.o      udata   0x0000a8       data   0x000000
@@ -88,10 +93,10 @@ Linker Map File - Created Mon Feb 15 12:00:17 2016
                               Program Memory Usage 
                                Start         End      
                            ---------   ---------      
-                            0x000000    0x000a11      
+                            0x000000    0x000bbf      
                             0x300001    0x300003      
                             0x300006    0x300006      
-            2582 out of 33048 program addresses used, program memory utilization is 7%
+            3012 out of 33048 program addresses used, program memory utilization is 9%
 
 
 
@@ -99,62 +104,65 @@ Linker Map File - Created Mon Feb 15 12:00:17 2016
                      Name    Address   Location    Storage File                     
                 ---------  ---------  ---------  --------- ---------                
                   BusyADC   0x00000e    program     extern E:\3.46\pic18-lt\cxx-framework\src\pmc_common\ADC\adcbusy.c
-               ConvertADC   0x0009f0    program     extern E:\3.46\pic18-lt\cxx-framework\src\pmc_common\ADC\adcconv.c
-                   D100_1   0x0009d0    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\delays\d100tcyx.asm
-                    D100x   0x0009ce    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\delays\d100tcyx.asm
-                   D3232S   0x000868    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\fxd3232s.asm
-                D3232SNEG   0x000876    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\fxd3232s.asm
-                 D3232SOK   0x000872    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\fxd3232s.asm
-                  D3232SX   0x000896    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\fxd3232s.asm
-                  DA3232S   0x000852    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\fxd3232s.asm
-             Delay100TCYx   0x0009c2    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\delays\d100tcyx.asm
-                 FXD3232S   0x000838    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\fxd3232s.asm
-                 FXD3232U   0x0008a0    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\fxd3232u.c
-                  FXM3232   0x00075a    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\fxm3232.c
-                  OpenADC   0x0007ca    program     extern E:\3.46\pic18-lt\cxx-framework\src\pmc_common\ADC\adcopen.c
-               OpenTimer0   0x000920    program     extern E:\3.46\pic18-lt\cxx-framework\src\pmc_common\Timers\t0open.c
-                  ReadADC   0x0009de    program     extern E:\3.46\pic18-lt\cxx-framework\src\pmc_common\ADC\adcread.c
-               SetChanADC   0x000958    program     extern E:\3.46\pic18-lt\cxx-framework\src\pmc_common\ADC\adcsetch.c
-              WriteTimer0   0x0008e8    program     extern E:\3.46\pic18-lt\cxx-framework\src\pmc_common\Timers\t0write.c
-       _D100TCYXCODE_0008   0x0009ca    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\delays\d100tcyx.asm
-       _D100TCYXCODE_0012   0x0009d4    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\delays\d100tcyx.asm
-       _D100TCYXCODE_0018   0x0009da    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\delays\d100tcyx.asm
-       ___return_lbl00000   0x0008e6    program     static                          
+              CloseTimer0   0x000b98    program     extern E:\3.46\pic18-lt\cxx-framework\src\pmc_common\Timers\t0close.c
+               ConvertADC   0x000b9e    program     extern E:\3.46\pic18-lt\cxx-framework\src\pmc_common\ADC\adcconv.c
+                   D100_1   0x000b78    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\delays\d100tcyx.asm
+                    D100x   0x000b76    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\delays\d100tcyx.asm
+                   D3232S   0x000a10    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\fxd3232s.asm
+                D3232SNEG   0x000a1e    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\fxd3232s.asm
+                 D3232SOK   0x000a1a    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\fxd3232s.asm
+                  D3232SX   0x000a3e    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\fxd3232s.asm
+                  DA3232S   0x0009fa    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\fxd3232s.asm
+             Delay100TCYx   0x000b6a    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\delays\d100tcyx.asm
+                 FXD3232S   0x0009e0    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\fxd3232s.asm
+                 FXD3232U   0x000a48    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\fxd3232u.c
+                  FXM3232   0x000902    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\fxm3232.c
+                  OpenADC   0x000972    program     extern E:\3.46\pic18-lt\cxx-framework\src\pmc_common\ADC\adcopen.c
+               OpenTimer0   0x000ac8    program     extern E:\3.46\pic18-lt\cxx-framework\src\pmc_common\Timers\t0open.c
+                  ReadADC   0x000b86    program     extern E:\3.46\pic18-lt\cxx-framework\src\pmc_common\ADC\adcread.c
+               SetChanADC   0x000b00    program     extern E:\3.46\pic18-lt\cxx-framework\src\pmc_common\ADC\adcsetch.c
+              WriteTimer0   0x000a90    program     extern E:\3.46\pic18-lt\cxx-framework\src\pmc_common\Timers\t0write.c
+       _D100TCYXCODE_0008   0x000b72    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\delays\d100tcyx.asm
+       _D100TCYXCODE_0012   0x000b7c    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\delays\d100tcyx.asm
+       _D100TCYXCODE_0018   0x000b82    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\delays\d100tcyx.asm
+       ___return_lbl00000   0x000970    program     static                          
+       ___return_lbl00000   0x000a8e    program     static                          
        ___return_lbl00000   0x00000c    program     static                          
-       ___return_lbl00000   0x0007c8    program     static                          
        ___return_lbl00000   0x000004    program     static                          
+       ___return_lbl00001   0x000b68    program     static                          
        ___return_lbl00001   0x00001c    program     static                          
-       ___return_lbl00001   0x0009c0    program     static                          
-       ___return_lbl00002   0x000758    program     static                          
+       ___return_lbl00002   0x000900    program     static                          
                __config_0   0x300001    program     static C:\Users\heathpr\Documents\GitHub\mechatroncis\FinalProject.X\main.c
                __config_1   0x300002    program     static C:\Users\heathpr\Documents\GitHub\mechatroncis\FinalProject.X\main.c
                __config_2   0x300003    program     static C:\Users\heathpr\Documents\GitHub\mechatroncis\FinalProject.X\main.c
                __config_3   0x300006    program     static C:\Users\heathpr\Documents\GitHub\mechatroncis\FinalProject.X\main.c
                    __init   0x000006    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\stdclib\__init.c
-            __zero_memory   0x000986    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f4520.asm
-                _do_cinit   0x0006bc    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\startup\c018i.c
+            __zero_memory   0x000b2e    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f4520.asm
+                _do_cinit   0x000864    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\startup\c018i.c
                    _entry   0x000000    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\startup\c018i.c
-                   _false   0x0008e2    program     static                          
-                 _startup   0x0009a6    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\startup\c018i.c
-                compare_l   0x00099c    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f4520.asm
-                copy_loop   0x00072e    program     static                          
-            copy_one_byte   0x000734    program     static                          
-                     done   0x000758    program     static                          
-             done_copying   0x000742    program     static                          
-                 high_isr   0x0003ea    program     extern C:\Users\heathpr\Documents\GitHub\mechatroncis\FinalProject.X\main.c
+                   _false   0x000a8a    program     static                          
+                 _startup   0x000b4e    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\startup\c018i.c
+                compare_l   0x000b44    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f4520.asm
+                copy_loop   0x0008d6    program     static                          
+            copy_one_byte   0x0008dc    program     static                          
+                     done   0x000900    program     static                          
+             done_copying   0x0008ea    program     static                          
+                 high_isr   0x00020e    program     extern C:\Users\heathpr\Documents\GitHub\mechatroncis\FinalProject.X\main.c
+                     home   0x0004e0    program     extern C:\Users\heathpr\Documents\GitHub\mechatroncis\FinalProject.X\main.c
  interrupt_at_high_vector   0x000008    program     extern C:\Users\heathpr\Documents\GitHub\mechatroncis\FinalProject.X\main.c
   interrupt_at_low_vector   0x000018    program     extern C:\Users\heathpr\Documents\GitHub\mechatroncis\FinalProject.X\main.c
-                     loop   0x0009b6    program     static                          
-                     loop   0x0008ae    program     static                          
-                   loop_h   0x000994    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f4520.asm
-                   loop_l   0x00099e    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f4520.asm
-                  low_isr   0x000484    program     extern C:\Users\heathpr\Documents\GitHub\mechatroncis\FinalProject.X\main.c
+                     loop   0x000a56    program     static                          
+                     loop   0x000b5e    program     static                          
+                   loop_h   0x000b3c    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f4520.asm
+                   loop_l   0x000b46    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f4520.asm
+                  low_isr   0x0002a8    program     extern C:\Users\heathpr\Documents\GitHub\mechatroncis\FinalProject.X\main.c
                      main   0x00002c    program     extern C:\Users\heathpr\Documents\GitHub\mechatroncis\FinalProject.X\main.c
-                     move   0x000526    program     extern C:\Users\heathpr\Documents\GitHub\mechatroncis\FinalProject.X\main.c
-            moveBackwards   0x0004e6    program     extern C:\Users\heathpr\Documents\GitHub\mechatroncis\FinalProject.X\main.c
-              moveForward   0x0004a6    program     extern C:\Users\heathpr\Documents\GitHub\mechatroncis\FinalProject.X\main.c
-                     test   0x0006d6    program     static                          
-               zero_block   0x000994    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f4520.asm
+                     move   0x00034a    program     extern C:\Users\heathpr\Documents\GitHub\mechatroncis\FinalProject.X\main.c
+            moveBackwards   0x00030a    program     extern C:\Users\heathpr\Documents\GitHub\mechatroncis\FinalProject.X\main.c
+              moveForward   0x0002ca    program     extern C:\Users\heathpr\Documents\GitHub\mechatroncis\FinalProject.X\main.c
+              movePattern   0x0006dc    program     extern C:\Users\heathpr\Documents\GitHub\mechatroncis\FinalProject.X\main.c
+                     test   0x00087e    program     static                          
+               zero_block   0x000b3c    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f4520.asm
                    ADCON0   0x000fc2       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f4520.asm
                ADCON0bits   0x000fc2       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f4520.asm
                    ADCON1   0x000fc1       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f4520.asm
@@ -399,50 +407,53 @@ Linker Map File - Created Mon Feb 15 12:00:17 2016
   interrupt_at_low_vector   0x000018    program     extern C:\Users\heathpr\Documents\GitHub\mechatroncis\FinalProject.X\main.c
        ___return_lbl00001   0x00001c    program     static                          
                      main   0x00002c    program     extern C:\Users\heathpr\Documents\GitHub\mechatroncis\FinalProject.X\main.c
-                 high_isr   0x0003ea    program     extern C:\Users\heathpr\Documents\GitHub\mechatroncis\FinalProject.X\main.c
-                  low_isr   0x000484    program     extern C:\Users\heathpr\Documents\GitHub\mechatroncis\FinalProject.X\main.c
-              moveForward   0x0004a6    program     extern C:\Users\heathpr\Documents\GitHub\mechatroncis\FinalProject.X\main.c
-            moveBackwards   0x0004e6    program     extern C:\Users\heathpr\Documents\GitHub\mechatroncis\FinalProject.X\main.c
-                     move   0x000526    program     extern C:\Users\heathpr\Documents\GitHub\mechatroncis\FinalProject.X\main.c
-                _do_cinit   0x0006bc    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\startup\c018i.c
-                     test   0x0006d6    program     static                          
-                copy_loop   0x00072e    program     static                          
-            copy_one_byte   0x000734    program     static                          
-             done_copying   0x000742    program     static                          
-                     done   0x000758    program     static                          
-       ___return_lbl00002   0x000758    program     static                          
-                  FXM3232   0x00075a    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\fxm3232.c
-       ___return_lbl00000   0x0007c8    program     static                          
-                  OpenADC   0x0007ca    program     extern E:\3.46\pic18-lt\cxx-framework\src\pmc_common\ADC\adcopen.c
-                 FXD3232S   0x000838    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\fxd3232s.asm
-                  DA3232S   0x000852    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\fxd3232s.asm
-                   D3232S   0x000868    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\fxd3232s.asm
-                 D3232SOK   0x000872    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\fxd3232s.asm
-                D3232SNEG   0x000876    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\fxd3232s.asm
-                  D3232SX   0x000896    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\fxd3232s.asm
-                 FXD3232U   0x0008a0    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\fxd3232u.c
-                     loop   0x0008ae    program     static                          
-                   _false   0x0008e2    program     static                          
-       ___return_lbl00000   0x0008e6    program     static                          
-              WriteTimer0   0x0008e8    program     extern E:\3.46\pic18-lt\cxx-framework\src\pmc_common\Timers\t0write.c
-               OpenTimer0   0x000920    program     extern E:\3.46\pic18-lt\cxx-framework\src\pmc_common\Timers\t0open.c
-               SetChanADC   0x000958    program     extern E:\3.46\pic18-lt\cxx-framework\src\pmc_common\ADC\adcsetch.c
-            __zero_memory   0x000986    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f4520.asm
-                   loop_h   0x000994    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f4520.asm
-               zero_block   0x000994    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f4520.asm
-                compare_l   0x00099c    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f4520.asm
-                   loop_l   0x00099e    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f4520.asm
-                 _startup   0x0009a6    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\startup\c018i.c
-                     loop   0x0009b6    program     static                          
-       ___return_lbl00001   0x0009c0    program     static                          
-             Delay100TCYx   0x0009c2    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\delays\d100tcyx.asm
-       _D100TCYXCODE_0008   0x0009ca    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\delays\d100tcyx.asm
-                    D100x   0x0009ce    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\delays\d100tcyx.asm
-                   D100_1   0x0009d0    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\delays\d100tcyx.asm
-       _D100TCYXCODE_0012   0x0009d4    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\delays\d100tcyx.asm
-       _D100TCYXCODE_0018   0x0009da    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\delays\d100tcyx.asm
-                  ReadADC   0x0009de    program     extern E:\3.46\pic18-lt\cxx-framework\src\pmc_common\ADC\adcread.c
-               ConvertADC   0x0009f0    program     extern E:\3.46\pic18-lt\cxx-framework\src\pmc_common\ADC\adcconv.c
+                 high_isr   0x00020e    program     extern C:\Users\heathpr\Documents\GitHub\mechatroncis\FinalProject.X\main.c
+                  low_isr   0x0002a8    program     extern C:\Users\heathpr\Documents\GitHub\mechatroncis\FinalProject.X\main.c
+              moveForward   0x0002ca    program     extern C:\Users\heathpr\Documents\GitHub\mechatroncis\FinalProject.X\main.c
+            moveBackwards   0x00030a    program     extern C:\Users\heathpr\Documents\GitHub\mechatroncis\FinalProject.X\main.c
+                     move   0x00034a    program     extern C:\Users\heathpr\Documents\GitHub\mechatroncis\FinalProject.X\main.c
+                     home   0x0004e0    program     extern C:\Users\heathpr\Documents\GitHub\mechatroncis\FinalProject.X\main.c
+              movePattern   0x0006dc    program     extern C:\Users\heathpr\Documents\GitHub\mechatroncis\FinalProject.X\main.c
+                _do_cinit   0x000864    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\startup\c018i.c
+                     test   0x00087e    program     static                          
+                copy_loop   0x0008d6    program     static                          
+            copy_one_byte   0x0008dc    program     static                          
+             done_copying   0x0008ea    program     static                          
+                     done   0x000900    program     static                          
+       ___return_lbl00002   0x000900    program     static                          
+                  FXM3232   0x000902    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\fxm3232.c
+       ___return_lbl00000   0x000970    program     static                          
+                  OpenADC   0x000972    program     extern E:\3.46\pic18-lt\cxx-framework\src\pmc_common\ADC\adcopen.c
+                 FXD3232S   0x0009e0    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\fxd3232s.asm
+                  DA3232S   0x0009fa    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\fxd3232s.asm
+                   D3232S   0x000a10    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\fxd3232s.asm
+                 D3232SOK   0x000a1a    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\fxd3232s.asm
+                D3232SNEG   0x000a1e    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\fxd3232s.asm
+                  D3232SX   0x000a3e    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\math\fxd3232s.asm
+                 FXD3232U   0x000a48    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\math\fxd3232u.c
+                     loop   0x000a56    program     static                          
+                   _false   0x000a8a    program     static                          
+       ___return_lbl00000   0x000a8e    program     static                          
+              WriteTimer0   0x000a90    program     extern E:\3.46\pic18-lt\cxx-framework\src\pmc_common\Timers\t0write.c
+               OpenTimer0   0x000ac8    program     extern E:\3.46\pic18-lt\cxx-framework\src\pmc_common\Timers\t0open.c
+               SetChanADC   0x000b00    program     extern E:\3.46\pic18-lt\cxx-framework\src\pmc_common\ADC\adcsetch.c
+            __zero_memory   0x000b2e    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f4520.asm
+                   loop_h   0x000b3c    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f4520.asm
+               zero_block   0x000b3c    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f4520.asm
+                compare_l   0x000b44    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f4520.asm
+                   loop_l   0x000b46    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f4520.asm
+                 _startup   0x000b4e    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\startup\c018i.c
+                     loop   0x000b5e    program     static                          
+       ___return_lbl00001   0x000b68    program     static                          
+             Delay100TCYx   0x000b6a    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\delays\d100tcyx.asm
+       _D100TCYXCODE_0008   0x000b72    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\delays\d100tcyx.asm
+                    D100x   0x000b76    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\delays\d100tcyx.asm
+                   D100_1   0x000b78    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\delays\d100tcyx.asm
+       _D100TCYXCODE_0012   0x000b7c    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\delays\d100tcyx.asm
+       _D100TCYXCODE_0018   0x000b82    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\delays\d100tcyx.asm
+                  ReadADC   0x000b86    program     extern E:\3.46\pic18-lt\cxx-framework\src\pmc_common\ADC\adcread.c
+              CloseTimer0   0x000b98    program     extern E:\3.46\pic18-lt\cxx-framework\src\pmc_common\Timers\t0close.c
+               ConvertADC   0x000b9e    program     extern E:\3.46\pic18-lt\cxx-framework\src\pmc_common\ADC\adcconv.c
                __config_0   0x300001    program     static C:\Users\heathpr\Documents\GitHub\mechatroncis\FinalProject.X\main.c
                __config_1   0x300002    program     static C:\Users\heathpr\Documents\GitHub\mechatroncis\FinalProject.X\main.c
                __config_2   0x300003    program     static C:\Users\heathpr\Documents\GitHub\mechatroncis\FinalProject.X\main.c
