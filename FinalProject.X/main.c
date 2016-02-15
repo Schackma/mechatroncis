@@ -19,12 +19,18 @@
 #include <p18f4520.h> 
 #include <timers.h>
 #include <adc.h>
+#include <delays.h>
 
 /** Define Constants Here ******************************************/
 #define STEP1 0b00001010
 #define STEP2 0b00001001
 #define STEP3 0b00000101
 #define STEP4 0b00000110
+
+#define PRESSED 0
+#define UNPRESSED 1
+
+#define AT_POINT 1
 
 #define REV_TO_DIST 12 //TODO: change  0.0123 inches/tick
 
@@ -33,6 +39,7 @@ void low_isr(void);
 void high_isr(void);
 char moveForward(char recentState);
 char moveBackwards(char recentState);
+void move(void);
 
 // ============================================================
 // Configuration Bits 
@@ -59,12 +66,14 @@ void interrupt_at_low_vector(void) {
 /** Global Variables *********************************************/
 char recentStateX = STEP1;
 char recentStateY = STEP1;
-int motor_spd = 65380;
+int motor_spd = 65035;
 volatile long goalX = 0;
 volatile long goalY = 0;
 volatile long x = 0;
 volatile long y = 0;
-
+volatile long xLength = 0;
+volatile long yLength = 0;
+int here = 0;
 
 /*****************************************************************
  * Function:        void main(void)
@@ -79,11 +88,11 @@ void main(void) {
 
     // Setup the timer with a 1:4 prescaler with 16 bits resolution
     // Therefore the timer0 freq is 500 kHz / 4 / 4 = 31.25 kHz
-    OpenTimer0(TIMER_INT_ON & T0_16BIT & T0_SOURCE_INT & T0_PS_1_4);
+
     // Should take a little over 2 seconds to overflow the counter from TMR0 = 0
     // If you write in a different starting value for TMR0 it'll overflow sooner
 
-    WriteTimer0(65530); // Start the timer at a some high value to get to the ISR the first time asap
+
 
     // Enable Global interrupts
     INTCONbits.GIE = 1; //  Enable High priority interrupt
@@ -93,23 +102,70 @@ void main(void) {
     TRISC = 0x00; // Make the RC4:RC0 outputs
     TRISD = 0x00;
     PORTC = 0x00; // Clear the bits to start with
+    TRISE = 0x07; // RE0:RE2 are inputs
 
     OpenADC(ADC_FOSC_8 & ADC_RIGHT_JUST & ADC_12_TAD,
             ADC_CH0 & ADC_INT_OFF & ADC_REF_VDD_VSS,
             0x0E);
 
+    while (PORTEbits.RE0 != PRESSED);
+    while (PORTBbits.RB2 != PRESSED) {
+        int output;
+        recentStateX = moveBackwards(recentStateX);
+        Delay100TCYx(5);
+        output = recentStateX;
+        PORTC = output;
+        output = recentStateY;
+        PORTD = output;
+    }
+    while (PORTBbits.RB3 != PRESSED) {
+        int output;
+        recentStateX = moveForward(recentStateX);
+        Delay100TCYx(5);
+        output = recentStateX;
+        PORTC = output;
+        output = recentStateY;
+        PORTD = output;
+        xLength++;
+    }
+    while (PORTBbits.RB1 != PRESSED) {
+        int output;
+        recentStateY = moveBackwards(recentStateY);
+        Delay100TCYx(5);
+        output = recentStateX;
+        PORTC = output;
+        output = recentStateY;
+        PORTD = output;
+    }
+    while (PORTBbits.RB0 != PRESSED) {
+        int output;
+        recentStateY = moveForward(recentStateY);
+        Delay100TCYx(5);
+        output = recentStateX;
+        PORTC = output;
+        output = recentStateY;
+        PORTD = output;
+        yLength++;
+    }
+    x = xLength*REV_TO_DIST;
+    y = yLength*REV_TO_DIST;
+    OpenTimer0(TIMER_INT_ON & T0_16BIT & T0_SOURCE_INT & T0_PS_1_4);
+    WriteTimer0(65530); // Start the timer at a some high value to get to the ISR the first time asap
+    here = 1;
     while (1) {
         // A blank while loop, think of all the things you could do here!
         // When you use an interrupt the main loop is free for something else
-                SetChanADC(ADC_CH0);
-                ConvertADC();
-                while (BusyADC());
-                goalX = (long)ReadADC()*8500 / 1023;
-        
-                SetChanADC(ADC_CH1);
-                ConvertADC();
-                while (BusyADC());
-                goalY = (long)ReadADC()*11000 / 1023;
+        if (here == AT_POINT) {
+            SetChanADC(ADC_CH0);
+            ConvertADC();
+            while (BusyADC());
+            goalX = (long) ReadADC() * xLength * REV_TO_DIST / 1023;
+
+            SetChanADC(ADC_CH1);
+            ConvertADC();
+            while (BusyADC());
+            goalY = (long) ReadADC() * yLength * REV_TO_DIST / 1023;
+        }
     }
 }
 
@@ -123,48 +179,13 @@ void main(void) {
 #pragma interrupt high_isr
 
 void high_isr(void) {
-    char output;
     // Check whether it was the timer interrupt that got us here 
     // (better be, since that's the only interrupt right now)
     if (INTCONbits.TMR0IF) {
         INTCONbits.TMR0IF = 0; // Clear interrupt flag for timer 0
-        if (x - goalX < -REV_TO_DIST) {
-            recentStateX = moveForward(recentStateX);
-            x += REV_TO_DIST;
-        } else if (x - goalX >= REV_TO_DIST) {
-            recentStateX = moveBackwards(recentStateX);
-            x -= REV_TO_DIST;
-        }
-        if (y - goalY < -REV_TO_DIST) {
-            recentStateY = moveForward(recentStateY);
-            //            recentStateY = recentStateY << 4;
-            y += REV_TO_DIST;
-        } else if (y - goalY >= REV_TO_DIST) {
-            recentStateY = moveBackwards(recentStateY);
-            //            recentStateY = recentStateY << 4;
-            y -= REV_TO_DIST;
-        }
+        move(); // call move function to increment position
     }
-    output = recentStateX;
-    PORTC = output;
-    output = recentStateY;
-    PORTD = output;
-    //TODO: bit shifting magic for y movement
 
-    // The Timer0 frequency is 31.25 kHz 
-    // Pick where to start the time to determine how fast it overflows
-    // Every overflow, the stepper motor will take a single step
-
-    //WriteTimer0(3036);   // 1 step every 2 seconds
-    //WriteTimer0(18661);  // 1 step every 1.5 seconds
-    //WriteTimer0(34286);  // 1 step every 1 seconds
-    //WriteTimer0(49911);  // 1 step every 0.5 seconds
-    //WriteTimer0(57723);  // 1 step every 0.25 seconds
-    //WriteTimer0(62411);  // 1 step every 0.1 seconds
-    //WriteTimer0(63973);  // 20 step every second
-    //WriteTimer0(64911);  // 50 step every second
-    //WriteTimer0(65224);  // 100 step every second
-    WriteTimer0(motor_spd); // 200 step every second
 }
 
 /******************************************************************
@@ -219,4 +240,37 @@ char moveBackwards(char recentState) {
             break;
     }
     return recentState;
+}
+
+void move(void) {
+    char output;
+    if (x - goalX < -3 * REV_TO_DIST) {
+        recentStateX = moveForward(recentStateX);
+        x += REV_TO_DIST;
+        here = 0;
+    } else if (x - goalX >= 3 * REV_TO_DIST) {
+        recentStateX = moveBackwards(recentStateX);
+        x -= REV_TO_DIST;
+        here = 0;
+    } else {
+        here = 1;
+    }
+    if (y - goalY < -3 * REV_TO_DIST) {
+        recentStateY = moveForward(recentStateY);
+        //            recentStateY = recentStateY << 4;
+        y += REV_TO_DIST;
+        here = 0;
+    } else if (y - goalY >= 3 * REV_TO_DIST) {
+        recentStateY = moveBackwards(recentStateY);
+        //            recentStateY = recentStateY << 4;
+        y -= REV_TO_DIST;
+        here = 0;
+    } else {
+        here = 1;
+    }
+    output = recentStateX;
+    PORTC = output;
+    output = recentStateY;
+    PORTD = output;
+    WriteTimer0(motor_spd);
 }
