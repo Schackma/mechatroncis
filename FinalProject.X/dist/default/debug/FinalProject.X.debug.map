@@ -1,5 +1,5 @@
 MPLINK 5.00, LINKER
-Linker Map File - Created Mon Feb 15 14:53:19 2016
+Linker Map File - Created Mon Feb 15 14:45:56 2016
 
                                  Section Info
                   Section       Type    Address   Location Size(Bytes)
@@ -25,33 +25,34 @@ Linker Map File - Created Mon Feb 15 14:53:19 2016
              D100TCYXCODE       code   0x000d62    program   0x00001c
           .code_adcread.o       code   0x000d7e    program   0x000012
           .code_adcconv.o       code   0x000d90    program   0x000004
-       .romdata_adcread.o    romdata   0x000d94    program   0x000000
-          .idata_main.o_i    romdata   0x000d94    program   0x000024
-        .romdata_t0open.o    romdata   0x000d94    program   0x000000
-        .idata_t0open.o_i    romdata   0x000d94    program   0x000000
-          .romdata_main.o    romdata   0x000d94    program   0x000000
-       .romdata_adcopen.o    romdata   0x000d94    program   0x000000
-      .romdata_adcsetch.o    romdata   0x000d94    program   0x000000
-       .romdata_fxm3232.o    romdata   0x000d94    program   0x000000
-       .idata_t0write.o_i    romdata   0x000d94    program   0x000000
-      .romdata_fxd3232u.o    romdata   0x000d94    program   0x000000
-       .romdata_t0write.o    romdata   0x000d94    program   0x000000
-      .romdata_fxd1616u.o    romdata   0x000d94    program   0x000000
         .romdata___init.o    romdata   0x000d94    program   0x000000
-       .romdata_adcconv.o    romdata   0x000d94    program   0x000000
+       .romdata_fxm3232.o    romdata   0x000d94    program   0x000000
+       .romdata_adcopen.o    romdata   0x000d94    program   0x000000
+       .romdata_t0write.o    romdata   0x000d94    program   0x000000
+        .idata_t0open.o_i    romdata   0x000d94    program   0x000000
+       .idata_t0write.o_i    romdata   0x000d94    program   0x000000
+        .romdata_t0open.o    romdata   0x000d94    program   0x000000
+       .romdata_adcread.o    romdata   0x000d94    program   0x000000
+      .romdata_adcsetch.o    romdata   0x000d94    program   0x000000
+      .romdata_fxd3232u.o    romdata   0x000d94    program   0x000000
          .romdata_c018i.o    romdata   0x000d94    program   0x000000
+      .romdata_fxd1616u.o    romdata   0x000d94    program   0x000000
+       .romdata_adcconv.o    romdata   0x000d94    program   0x000000
+          .idata_main.o_i    romdata   0x000d94    program   0x000024
        .romdata_adcbusy.o    romdata   0x000d94    program   0x000000
-            .code_c018i.o       code   0x000db8    program   0x000000
-      .idata_adcsetch.o_i    romdata   0x000db8    program   0x000000
-        .idata___init.o_i    romdata   0x000db8    program   0x000000
+          .romdata_main.o    romdata   0x000d94    program   0x000000
          .idata_c018i.o_i    romdata   0x000db8    program   0x000000
+            .code_c018i.o       code   0x000db8    program   0x000000
+        .idata___init.o_i    romdata   0x000db8    program   0x000000
+      .idata_adcsetch.o_i    romdata   0x000db8    program   0x000000
        .idata_adcread.o_i    romdata   0x000db8    program   0x000000
-       .idata_adcopen.o_i    romdata   0x000db8    program   0x000000
-       .idata_fxm3232.o_i    romdata   0x000db8    program   0x000000
-      .idata_fxd3232u.o_i    romdata   0x000db8    program   0x000000
-      .idata_fxd1616u.o_i    romdata   0x000db8    program   0x000000
-       .idata_adcconv.o_i    romdata   0x000db8    program   0x000000
        .idata_adcbusy.o_i    romdata   0x000db8    program   0x000000
+       .idata_adcconv.o_i    romdata   0x000db8    program   0x000000
+      .idata_fxd1616u.o_i    romdata   0x000db8    program   0x000000
+       .idata_adcopen.o_i    romdata   0x000db8    program   0x000000
+      .idata_fxd3232u.o_i    romdata   0x000db8    program   0x000000
+       .idata_fxm3232.o_i    romdata   0x000db8    program   0x000000
+                    dbgP0       code   0x007dc0    program   0x000240
     .config_300001_main.o    romdata   0x300001    program   0x000001
     .config_300002_main.o    romdata   0x300002    program   0x000001
     .config_300003_main.o    romdata   0x300003    program   0x000001
@@ -61,6 +62,7 @@ Linker Map File - Created Mon Feb 15 14:53:19 2016
                 DELAYDAT1      udata   0x000014       data   0x000001
             .idata_main.o      idata   0x000080       data   0x000024
            .udata_c018i.o      udata   0x0000a4       data   0x00000a
+         .idata_fxm3232.o      idata   0x0000ae       data   0x000000
          .udata_adcopen.o      udata   0x0000ae       data   0x000000
          .idata_adcopen.o      idata   0x0000ae       data   0x000000
           .udata_t0open.o      udata   0x0000ae       data   0x000000
@@ -73,7 +75,6 @@ Linker Map File - Created Mon Feb 15 14:53:19 2016
          .idata_t0write.o      idata   0x0000ae       data   0x000000
           .udata___init.o      udata   0x0000ae       data   0x000000
           .idata___init.o      idata   0x0000ae       data   0x000000
-         .idata_fxm3232.o      idata   0x0000ae       data   0x000000
          .udata_fxm3232.o      udata   0x0000ae       data   0x000000
         .idata_fxd3232u.o      idata   0x0000ae       data   0x000000
         .udata_fxd3232u.o      udata   0x0000ae       data   0x000000
@@ -85,7 +86,8 @@ Linker Map File - Created Mon Feb 15 14:53:19 2016
          .udata_adcbusy.o      udata   0x0000ae       data   0x000000
             .udata_main.o      udata   0x0000ae       data   0x000000
            .idata_c018i.o      idata   0x0000ae       data   0x000000
-                   .stack      udata   0x000500       data   0x000100
+                   .stack      udata   0x000400       data   0x000100
+                    dbgD0      udata   0x0005f4       data   0x00000c
             SFR_UNBANKED0      udata   0x000f80       data   0x000080
 
 
@@ -94,9 +96,10 @@ Linker Map File - Created Mon Feb 15 14:53:19 2016
                                Start         End      
                            ---------   ---------      
                             0x000000    0x000db7      
+                            0x007dc0    0x007fff      
                             0x300001    0x300003      
                             0x300006    0x300006      
-            3516 out of 33048 program addresses used, program memory utilization is 10%
+            4092 out of 33048 program addresses used, program memory utilization is 12%
 
 
 

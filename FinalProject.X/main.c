@@ -31,6 +31,9 @@
 #define UNPRESSED 1
 
 #define AT_POINT 1
+#define NOT_AT_POINT 0;
+
+#define TOL 4
 
 #define REV_TO_DIST 12 //TODO: change  0.0123 inches/tick
 
@@ -68,14 +71,17 @@ void interrupt_at_low_vector(void) {
 /** Global Variables *********************************************/
 char recentStateX = STEP1;
 char recentStateY = STEP1;
-int motor_spd = 65035;
+int motor_spd = 65410;
 volatile long goalX = 0;
 volatile long goalY = 0;
 volatile long x = 0;
 volatile long y = 0;
 volatile long xLength = 0;
 volatile long yLength = 0;
-int here = 0;
+int hereX = 0;
+int hereY = 0;
+int stepsTillRead = 100;
+int steps = 0;
 
 /*****************************************************************
  * Function:        void main(void)
@@ -108,11 +114,12 @@ void main(void) {
     home();
     OpenTimer0(TIMER_INT_ON & T0_16BIT & T0_SOURCE_INT & T0_PS_1_4);
     WriteTimer0(65530); // Start the timer at a some high value to get to the ISR the first time asap
-    here = 1;
+    hereX = 1;
+    hereY = 1;
     while (1) {
         // A blank while loop, think of all the things you could do here!
         // When you use an interrupt the main loop is free for something else
-        if (here == AT_POINT) {
+        if (steps % stepsTillRead == 0) {
             SetChanADC(ADC_CH0);
             ConvertADC();
             while (BusyADC());
@@ -204,29 +211,36 @@ char moveBackwards(char recentState) {
 
 void move(void) {
     char output;
-    if (x - goalX < -3 * REV_TO_DIST) {
+    if (x - goalX < -TOL * REV_TO_DIST) {
         recentStateX = moveForward(recentStateX);
         x += REV_TO_DIST;
-        here = 0;
-    } else if (x - goalX >= 3 * REV_TO_DIST) {
+        steps++;
+        hereX = NOT_AT_POINT;
+    } else if (x - goalX >= TOL * REV_TO_DIST) {
         recentStateX = moveBackwards(recentStateX);
         x -= REV_TO_DIST;
-        here = 0;
+        steps++;
+        hereX = NOT_AT_POINT;
+
     } else {
-        here = 1;
+        steps++;
+        hereX = AT_POINT;
     }
-    if (y - goalY < -3 * REV_TO_DIST) {
+    if (y - goalY < -TOL * REV_TO_DIST) {
         recentStateY = moveForward(recentStateY);
         //            recentStateY = recentStateY << 4;
         y += REV_TO_DIST;
-        here = 0;
-    } else if (y - goalY >= 3 * REV_TO_DIST) {
+        steps++;
+        hereY = NOT_AT_POINT;
+    } else if (y - goalY >= TOL * REV_TO_DIST) {
         recentStateY = moveBackwards(recentStateY);
         //            recentStateY = recentStateY << 4;
         y -= REV_TO_DIST;
-        here = 0;
+        steps++;
+        hereY = NOT_AT_POINT;
     } else {
-        here = 1;
+        steps++;
+        hereY = AT_POINT;
     }
     output = recentStateX;
     PORTC = output;
@@ -280,17 +294,24 @@ void home(void) {
 }
 
 void movePattern(void) {
-    CloseTimer0();
+    
     while (PORTEbits.RE2 != PRESSED) {
-        goalY = 100 * yLength * REV_TO_DIST / 1023;
-        while (here != AT_POINT && PORTEbits.RE2 != PRESSED) {
-            move();
+        goalY = (long) 100 * yLength * REV_TO_DIST / 1023;
+        while (hereY != AT_POINT && PORTEbits.RE2 != PRESSED) {
+
         }
-        goalY = 1000 * yLength * REV_TO_DIST / 1023;
-        while (here != AT_POINT && PORTEbits.RE2 != PRESSED) {
-            move();
+        goalX = (long) 100 * yLength * REV_TO_DIST / 1023;
+        while (hereX != AT_POINT && PORTEbits.RE2 != PRESSED) {
+
+        }
+        goalY = (long) 1000 * yLength * REV_TO_DIST / 1023;
+        while (hereY != AT_POINT && PORTEbits.RE2 != PRESSED) {
+
+        }
+        goalX = (long) 1000 * yLength * REV_TO_DIST / 1023;
+        while (hereX != AT_POINT && PORTEbits.RE2 != PRESSED) {
+
         }
     }
-    OpenTimer0(TIMER_INT_ON & T0_16BIT & T0_SOURCE_INT & T0_PS_1_4);
     WriteTimer0(65530);
 }
